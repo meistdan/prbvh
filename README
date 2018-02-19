@@ -39,6 +39,7 @@ The PRBVH method is configurable via 'gpu-ray-traversal/prbvh.cfg' file.
 - morton60: 0-1 
 - adaptiveLeafSize: 0-1
 - maxLeafSize: 1-64
+- mod: 1-64
  
 //---------------------------------------------------------------------------
 // ACKNOWLEDGMENTS
