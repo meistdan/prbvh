@@ -1,0 +1,66 @@
+//---------------------------------------------------------------------------
+// ABOUT
+//---------------------------------------------------------------------------
+
+This project contains an implementation of the PRBVH BVH builder based 
+on Parallel reinsertion for Bounding Volume Hierarchy Optimization [1]. 
+The builder is integrated into the ray tracing code of Aila et al. [2] 
+and exploits the CUB library for sorting [3]. For more details about PRBVH see [1].
+
+//---------------------------------------------------------------------------
+// AUTHORS
+//---------------------------------------------------------------------------
+
+Daniel Meister (meistdan@fel.cvut.cz), Jiri Bittner (bittner@fel.cvut.cz)
+Czech Technical University in Prague
+
+//---------------------------------------------------------------------------
+// REQUIREMENTS
+//---------------------------------------------------------------------------
+
+- Microsoft Windows 7+
+- CUDA 9.1, compute capability 3.0+
+- Windows: Visual Studio C++ 12.0
+
+Notes:
+The PRBVH BVH builder and the ray tracing application use the CUDA driver API,
+while the CUB library used for sorting has to use the CUDA runtime API. If the
+cub project does not load correctly do the following:
+- Check 'C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\BuildCustomizations\'
+It should contain a props file (e.g. 'CUDA 9.1.props'). If not find it and copy it.
+- If you use different version of CUDA then check the project file (cub/cub.vcxproj)
+and replace it with the appropriate version (e.g. 'CUDA 9.1' by 'CUDA 8.5').
+
+//---------------------------------------------------------------------------
+// CONFIGURATION
+//---------------------------------------------------------------------------
+
+The PRBVH method is configurable via 'gpu-ray-traversal/prbvh.cfg' file.
+- morton60: 0-1 
+- adaptiveLeafSize: 0-1
+- maxLeafSize: 1-64
+ 
+//---------------------------------------------------------------------------
+// ACKNOWLEDGMENTS
+//---------------------------------------------------------------------------
+
+We thank Timo Aila, Samuli Laine, and Tero Karras for making their high performance 
+ray tracing framework publicly available. We also thank the developers of CUB library 
+which we use for sorting. 
+
+//---------------------------------------------------------------------------
+// REFERENCES
+//---------------------------------------------------------------------------
+
+[1] Daniel Meister, Jiri Bittner. Parallel reinsertion for Bounding Volume Hierarchy Optimization.
+Computer Graphica Forum (Proceedings of Eurographics 2018), 2018
+2017.
+
+[2] Timo Aila and Samuli Laine. Understanding the Efficiency of Ray Traversal on GPUs. 
+High-Performance Graphics, 2009. 
+http://www.tml.tkk.fi/~timo/publications/aila2009hpg_paper.pdf
+
+[3] Duane Merrill and Andrew Grimshaw. High Performance and Scalable Radix Sorting.
+Parallel Processing Letters, 2011
+https://5d3c0b13-a-62cb3a1a-s-sites.googlegroups.com/site/duanemerrill/PplGpuSortingPreprint.pdf
+
